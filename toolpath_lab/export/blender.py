@@ -9,6 +9,7 @@ from toolpath_lab.core.path import Toolpath
 from toolpath_lab.core.region import RegionShape
 from toolpath_lab.core.tool import Tool, ToolKind
 from toolpath_lab.core.errors import PlanningError
+from toolpath_lab.export.windows import python_launcher_bat
 
 BLENDER_OPTIONS = ParameterSet((
     spec("fps", "帧率", K.INT, 30, minimum=24, maximum=120, group="Blender", unit="fps"),
@@ -48,11 +49,8 @@ def blender_bundle(tool: Tool, region: RegionShape, toolpath: Toolpath,
         archive.writestr("scene.json", json.dumps(manifest, ensure_ascii=False, indent=2))
         for name in ("build_scene.py", "launch_blender.py", "README.txt"):
             archive.writestr(name, (templates / name).read_bytes())
-        for filename, args in (("01_create_scene.bat", ""),
-                               ("02_render_preview.bat", "--render preview"),
-                               ("03_render_cycles.bat", "--render cycles")):
-            bat = '@echo off\r\nchcp 65001 >nul\r\ncd /d "%~dp0"\r\n'
-            bat += 'where py >nul 2>nul\r\nif errorlevel 1 (\r\n'
-            bat += f'  python launch_blender.py {args}\r\n) else (\r\n  py -3 launch_blender.py {args}\r\n)\r\npause\r\n'
-            archive.writestr(filename, bat.encode("utf-8"))
+        for filename, args in (("01_create_scene.bat", ()),
+                               ("02_render_preview.bat", ("--render", "preview")),
+                               ("03_render_cycles.bat", ("--render", "cycles"))):
+            archive.writestr(filename, python_launcher_bat("launch_blender.py", args))
     return stream.getvalue()

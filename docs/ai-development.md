@@ -29,6 +29,14 @@ Harness 为本机 Codex 桌面应用，实际模型 `gpt-6.1-sol`，来自本任
 
 EEVEE 生成 1920×1080、30 fps、10 倍速视频；Cycles 输出三张 1080p 图片，可编辑 .blend 保留双相机和内嵌数据。Word 报告与介绍 PPT 在功能开发和自动化验收完成后制作。
 
+## 2026 年 10 月 8 日启动修复
+
+用户反馈双击完整交付包的平台 BAT 出现截断命令、乱码和路径错误。复现确认旧 BAT 使用 UTF-8 中文内容及 LF，切换 Windows cmd 代码页时发生解析错误。此前检查了 Python 语法，但未实际运行交付 BAT，漏掉了这个问题。
+
+平台和 Blender 入口统一由 `export/windows.py` 生成纯 ASCII、CRLF BAT，并改用 ASCII Python 文件名。增加解释器及 numpy 检测、全新目录自动解压源码、重复启动识别和 `platform-launch.log`。另发现 CLI 的 SO_REUSEADDR 端口探测在 Windows 下可能错误绑定已监听端口，移除探测时的该选项，验证占用后自动使用下一端口。
+
+136 项 unittest 通过（新增 8 项启动回归），无界面规划示例通过。真实 cmd 在 936 与 65001 代码页、中文/空格/括号/&/! 目录下通过；独立源码 ZIP 从其他工作目录启动，网页、规划、对比、NC、Blender 导出均正常，重复启动及端口占用检查通过。网页新下载的 Blender ZIP 通过 BAT 建场景并在 Blender 5.1.2 重开验证，312 个位置探针最大误差约 0.000113716 mm。集成脚本为 `examples/verify_course_launcher.py`，实测摘要与日志随修正版交付包保存。未重新制作 Word、PPT 或渲染素材。
+
 ## 可核实资料
 
 - [ToolpathLab 基座说明](https://github.com/large-su/toolpath-lab/blob/main/README.md)

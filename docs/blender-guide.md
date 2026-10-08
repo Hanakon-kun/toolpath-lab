@@ -20,7 +20,7 @@
 4. 在 Blender 中按空格播放；顶部时间线范围已设置。小键盘 0 进入相机视图；无小键盘可用“视图 → 相机 → 活动相机”。
 5. `02_render_preview.bat` 用 EEVEE 渲染 MP4；`03_render_cycles.bat` 用 Cycles 渲染 MP4，时间更长。
 
-启动 BAT 需要常规 Python 3（`py -3` 或 `python`）。本次电脑如没有系统 Python，可在 PowerShell 中直接使用 Blender 命令，不依赖外部 Python：
+启动 BAT 会检查 Python 3.10+，可使用本目录 .venv、Codex 自带 Python、系统 Python 或常见 Conda 安装；也可用 `TOOLPATH_LAB_PYTHON` 指定解释器。BAT 保持纯 ASCII 与 CRLF，支持中文和含空格的目录。命令行运行 `01_create_scene.bat --no-open` 可只建场景、不打开窗口。如没有外部 Python，可在 PowerShell 中直接使用 Blender 命令：
 
 ```powershell
 & 'C:\Program Files\Blender Foundation\Blender 5.1\blender.exe' --background --factory-startup --python-exit-code 1 --python .\build_scene.py -- --data .\scene.json --output .\machining.blend
@@ -51,3 +51,11 @@ python examples/verify_blender.py --blender 'C:\Program Files\Blender Foundation
 ```
 
 第三条会验证外向内、内向外、小区域、刀具接近区域尺寸、6 mm 切宽、方形栅格和圆形栅格，分别建场景并重新打开。实测数据见课程交付目录。
+
+## 完整交付包启动与排错
+
+先解压完整课程 ZIP，再双击 `启动平台.bat`；保留同目录 `launch_platform.py` 和 `toolpath-lab源码.zip`。首次启动会自动解压随包源码，重复启动会识别已有的课程服务。端口被其他程序占用时，自动尝试后续端口，以终端显示的地址为准。运行期间保留终端窗口。
+
+在交付目录执行 `启动平台.bat --check` 可检查 Python、numpy、源码和螺旋规划，不打开网页。详细错误保存为同目录 `platform-launch.log`。不能在 ZIP 预览窗口中只运行 BAT；请把整个交付包解压到可写文件夹。
+
+维护交付包：运行 `python examples/update_course_launchers.py <交付目录>` 同步平台和 Blender 启动入口；然后更新源码 ZIP 和完整 ZIP。Windows 集成验证用 `python examples/verify_course_launcher.py <交付目录> --output exports/launcher-qa --blender <blender.exe完整路径>`，包括全新解压目录、两种代码页、真实 BAT、HTTP、端口占用、重复启动及下载后 Blender 建场景和重开。

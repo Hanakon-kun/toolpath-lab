@@ -28,6 +28,7 @@ def find_blender():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--render", choices=("preview", "cycles"))
+    parser.add_argument("--no-open", action="store_true", help="Build without opening the Blender window")
     args = parser.parse_args()
     root = Path(__file__).resolve().parent
     blender = find_blender()
@@ -39,7 +40,7 @@ def main():
                     "CYCLES" if args.render == "cycles" else "BLENDER_EEVEE"]
     subprocess.run(command, check=True)
     print("场景与渲染输出位于：", root)
-    if not args.render:
+    if not args.render and not args.no_open:
         subprocess.Popen([blender, str(root / "machining.blend")])
 
 
