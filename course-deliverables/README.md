@@ -1,6 +1,6 @@
 # 课程汇报与成果
 
-更新日期：2026-10-08。源码分支为 `feature/spiral-blender`。
+更新日期：2026-10-08。源码分支为 `U202310570`，由原 `feature/spiral-blender` 分支改名而来。
 
 ## 查看成果
 
@@ -56,14 +56,14 @@ python examples/headless_plan.py
 在本地仓库 `toolpath-lab` 中执行（不要在外层交付文件夹执行）：
 
 ```powershell
-git switch feature/spiral-blender
-git pull --ff-only origin feature/spiral-blender
+git switch U202310570
+git pull --ff-only origin U202310570
 git status
 # 修改源码或将最新成果复制到 course-deliverables 后，先完成相应检查。
 git add <本次要提交的文件或目录>
 git diff --cached --stat
 git commit -m "Describe the latest changes"
-git push origin feature/spiral-blender
+git push origin U202310570
 ```
 
 若自己修改了成果文件，发布前同步更新 `manifest.json` 中对应条目的字节数和 SHA-256。个人分支推送无需给上游仓库创建 Pull Request；老师要求上游提交时再另行处理。

@@ -1,6 +1,6 @@
 # AI 辅助开发记录
 
-课程范围为第二页“刀路规划功能开发训练”。使用个人 Fork `Hanakon-kun/toolpath-lab`，基线 main 为 `00e6d908a6544cd8a54af95980f4e1929d7a6626`，功能分支 `feature/spiral-blender`。现有 UG 刀路作业未修改。
+课程范围为第二页“刀路规划功能开发训练”。使用个人 Fork `Hanakon-kun/toolpath-lab`，基线 main 为 `00e6d908a6544cd8a54af95980f4e1929d7a6626`，原功能分支 `feature/spiral-blender` 于 2026-10-08 按用户要求改名为学号 `U202310570`。现有 UG 刀路作业未修改。
 
 ## 工具与任务
 
