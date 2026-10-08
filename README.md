@@ -34,6 +34,9 @@ ToolpathLab 是一个刀路规划基座：给定一把刀具和一块规则形�
 本分支是“刀路规划功能开发训练”的课程扩展。开发与验收记录见 [AI 开发记录](docs/ai-development.md)，
 新功能使用和 Blender 新手操作见 [Blender 使用说明](docs/blender-guide.md)。
 
+课程最新进展与汇报成果见 [课程成果目录](course-deliverables/README.md)：包含当前 13 页 UG 与功能开发整合 PPT、
+功能开发报告、Blender 场景、1080p 演示视频及对比数据。Windows 启动修复已完成，当前 136 项测试通过。
+
 ## 界面
 
 左侧是参数面板，右侧是三维视图、统计与播放条。
